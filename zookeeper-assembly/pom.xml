@@ -168,6 +168,160 @@
           <skip>true</skip>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>rpm-maven-plugin</artifactId>
+        <version>2.1.5</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>rpm</goal>
+            </goals>
+          </execution>
+        </executions>
+
+        <configuration>
+          <!-- 最后打包后的rpm名字为
+          ${rpm.install.path}-${project.version}-release-noarch.rpm
+          -->
+          <!-- 打包后的路径  -->
+          <prefix></prefix>
+
+          <!-- 描述信息 -->
+          <distribution>maven package rpm zk</distribution>
+
+          <!-- 集团信息 -->
+          <group>${groupId}</group>
+
+          <!-- 打包作者信息(作者|公司名) -->
+          <packager>nanata</packager>
+
+          <!-- npd版本信息  -->
+          <version>3.0</version>
+          <!-- 小版本(可选参数,不填默认为1) -->
+          <!--          <release></release>-->
+          <needarch>x86_64</needarch>
+          <!-- 是否自动解决依赖 -->
+          <autoRequires>false</autoRequires>
+
+          <!-- 依赖其他的rpm包 -->
+          <!--<requires>
+              <require>java-1.8.0 >= 1.8</require>
+          </requires>-->
+
+          <mappings>
+
+            <!-- 将相关文件放入rpm包内 -->
+            <mapping>
+              <!-- 安装rpm时指向的服务器安装目录  -->
+              <directory>/usr/ndp/3.0/zookeeper/bin</directory>
+              <filemode>755</filemode>
+              <username>zookeeper</username>
+              <groupname>zookeeper</groupname>
+              <sources>
+                <source>
+                  <location>../bin</location>
+                </source>
+              </sources>
+            </mapping>
+
+            <mapping>
+              <!-- 安装rpm时指向的服务器安装目录  -->
+              <directory>/usr/ndp/3.0/zookeeper/conf</directory>
+              <filemode>755</filemode>
+              <username>zookeeper</username>
+              <groupname>zookeeper</groupname>
+              <sources>
+                <source>
+                  <location>../conf</location>
+                </source>
+              </sources>
+            </mapping>
+
+            <!-- 复制安装相关脚本命令 根据具体项目需要决定是否使用-->
+            <mapping>
+              <!-- 安装rpm时指向的服务器安装目录  -->
+              <directory>/usr/ndp/3.0/zookeeper/docs</directory>
+              <filemode>755</filemode>
+              <username>zookeeper</username>
+              <groupname>zookeeper</groupname>
+              <sources>
+                <source>
+                  <location>../zookeeper-docs/src/main/resources/markdown</location>
+                </source>
+              </sources>
+            </mapping>
+            <!-- 复制安装相关脚本命令 根据具体项目需要决定是否使用-->
+            <mapping>
+              <!-- 安装rpm时指向的服务器安装目录  -->
+              <directory>/usr/ndp/3.0/zookeeper/lib</directory>
+              <filemode>755</filemode>
+              <username>zookeeper</username>
+              <groupname>zookeeper</groupname>
+              <sources>
+                <source>
+                  <location>../zookeeper-server/target/lib</location>
+                </source>
+              </sources>
+            </mapping>
+            <mapping>
+              <!-- 安装rpm时指向的服务器安装目录  -->
+              <directory>/usr/ndp/3.0/zookeeper/lib</directory>
+              <filemode>755</filemode>
+              <username>zookeeper</username>
+              <groupname>zookeeper</groupname>
+              <sources>
+                <source>
+                  <location>../zookeeper-server/target/zookeeper-3.9.0-SNAPSHOT.jar</location>
+                </source>
+              </sources>
+            </mapping>
+            <mapping>
+              <!-- 安装rpm时指向的服务器安装目录  -->
+              <directory>/usr/ndp/3.0/zookeeper/lib</directory>
+              <filemode>755</filemode>
+              <username>zookeeper</username>
+              <groupname>zookeeper</groupname>
+              <sources>
+                <source>
+                  <location>../zookeeper-metrics-providers/zookeeper-prometheus-metrics/target/zookeeper-prometheus-metrics-3.9.0-SNAPSHOT.jar</location>
+                </source>
+              </sources>
+            </mapping>
+            <!-- 复制安装相关脚本命令 根据具体项目需要决定是否使用-->
+            <mapping>
+              <!-- 安装rpm时指向的服务器安装目录  -->
+              <directory>/usr/ndp/3.0/zookeeper</directory>
+              <filemode>755</filemode>
+              <username>zookeeper</username>
+              <groupname>zookeeper</groupname>
+              <sources>
+                <source>
+                  <location>../README.md</location>
+                </source>
+              </sources>
+            </mapping><!-- 复制安装相关脚本命令 根据具体项目需要决定是否使用-->
+            <mapping>
+              <!-- 安装rpm时指向的服务器安装目录  -->
+              <directory>/usr/ndp/3.0/zookeeper</directory>
+              <filemode>755</filemode>
+              <username>zookeeper</username>
+              <groupname>zookeeper</groupname>
+              <sources>
+                <source>
+                  <location>../README_packaging.md</location>
+                </source>
+              </sources>
+            </mapping>
+
+          </mappings>
+
+
+
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
