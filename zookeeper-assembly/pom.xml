@@ -188,6 +188,7 @@
           -->
           <!-- 打包后的路径  -->
           <prefix></prefix>
+          <name>zookeeper</name>
 
           <!-- 描述信息 -->
           <distribution>maven package rpm zk</distribution>
@@ -197,6 +198,8 @@
 
           <!-- 打包作者信息(作者|公司名) -->
           <packager>nanata</packager>
+          <targetOS>linux</targetOS>
+          <targetVendor>rh</targetVendor>
 
           <!-- npd版本信息  -->
           <version>3.0</version>
